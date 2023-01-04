@@ -6,6 +6,7 @@
 // ROOT LIBRARIES TO MANAGE AND GRAPH DATA
 #include "TCanvas.h"
 #include "TH1I.h"
+#include "TF1.h"
 
 // USING DECLARATIONS
 using std::vector;
@@ -59,6 +60,12 @@ void dicestats()
     vector<int> dicevents = roll_initializer(n, f, m, b);
 
     //------------------------------//
+    //       APPEARENCE SETUP       //
+    //------------------------------//
+
+    // write settings for appearence customization: see TStyle
+
+    //------------------------------//
     //   HISTOGRAM INIZIALIZATION   //
     //------------------------------//
 
@@ -79,4 +86,15 @@ void dicestats()
     TCanvas *c = new TCanvas("Canvas");
     //drawing the histogram on the canvas
     h->Draw("HIST");
+
+    //------------------------------//
+    //    FUNCTION INIZIALIZATION   //
+    //------------------------------//
+
+    //inizialization of the function
+    TF1 * function = new TF1("function", "gaus", start, end);
+    //fitting of funtion
+    h->Fit("function");
+    //drawing of function
+    function->Draw("SAME");
 }
